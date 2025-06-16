@@ -157,10 +157,6 @@ local ollama = {
 			temperature = 0.7,
 		},
 	},
-	-- options = {
-	-- 	num_ctx = 8192,
-	-- 	temperature = 0.7,
-	-- },
 	disable_tools = true,
 	parse_messages = parse_messages,
 	parse_curl_args = parse_curl_args,
@@ -190,15 +186,6 @@ return {
 				model = "qwen2.5-coder:14b",
 			},
 		},
-		-- vendors = {
-		-- 	ollama = ollama,
-		-- 	ollama2 = {
-		-- 		__inherited_from = "openai",
-		-- 		api_key_name = "",
-		-- 		endpoint = "http://127.0.0.1:11434/v1",
-		-- 		model = "qwen2.5-coder:14b",
-		-- 	},
-		-- },
 	},
 
 	build = "make",
