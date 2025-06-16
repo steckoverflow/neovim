@@ -150,10 +150,17 @@ local ollama = {
 	-- model = "phi4",
 	-- model = "deepseek-r1:14b",
 	-- model = "llama3.1:latest",
-	options = {
-		num_ctx = 8192,
-		temperature = 0.7,
+	extra_request_body = {
+
+		options = {
+			num_ctx = 8192,
+			temperature = 0.7,
+		},
 	},
+	-- options = {
+	-- 	num_ctx = 8192,
+	-- 	temperature = 0.7,
+	-- },
 	disable_tools = true,
 	parse_messages = parse_messages,
 	parse_curl_args = parse_curl_args,
@@ -174,7 +181,7 @@ return {
 		auto_suggestions_provider = "ollama",
 		debug = true,
 		provider = "ollama",
-		vendors = {
+		providers = {
 			ollama = ollama,
 			ollama2 = {
 				__inherited_from = "openai",
@@ -183,6 +190,15 @@ return {
 				model = "qwen2.5-coder:14b",
 			},
 		},
+		-- vendors = {
+		-- 	ollama = ollama,
+		-- 	ollama2 = {
+		-- 		__inherited_from = "openai",
+		-- 		api_key_name = "",
+		-- 		endpoint = "http://127.0.0.1:11434/v1",
+		-- 		model = "qwen2.5-coder:14b",
+		-- 	},
+		-- },
 	},
 
 	build = "make",
