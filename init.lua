@@ -1,10 +1,13 @@
---Basics
-require("globals")
-require("functions")
-require("options")
-require("keymaps")
+--Presetting some things needed by for instance Lazy
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+vim.g.have_nerd_font = true
+vim.o.clipboard = "unnamedplus"
 
---Plugins
 require("config.lazy")
+require("config.options")
+require("config.keymaps")
+require("config.functions")
 
-vim.cmd("colorscheme cyberdream")
+--Colorscheme
+vim.cmd("colorscheme lytmode")
