@@ -13,18 +13,19 @@ return {
 		"mfussenegger/nvim-dap-python",
 		"leoluz/nvim-dap-go",
 		"nvim-neotest/nvim-nio", -- "jbyuki/one-small-step-for-vimkind", -- Neovim
-		-- {
-		--   "microsoft/vscode-js-debug",
-		--   build = "npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
-		--   version = "1.*"
-		-- },
-		-- {
-		--   "mxsdev/nvim-dap-vscode-js",
-		--   opts = {
-		--     debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
-		--     adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "pwa-extensionHost", "node-terminal" }
-		--   }
-		-- }
+		{
+			"microsoft/vscode-js-debug",
+			build =
+			"npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+			version = "1.*"
+		},
+		{
+			"mxsdev/nvim-dap-vscode-js",
+			opts = {
+				debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
+				adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "pwa-extensionHost", "node-terminal" }
+			}
+		}
 	},
 	keys = {
 		-- Basic debugging keymaps, feel free to change to your liking!
@@ -110,12 +111,38 @@ return {
 		},
 	},
 	config = function()
-		local dap = require("dap")
-		local dapui = require("dapui")
+		require("dapui").setup()
+		require("dap-go").setup()
 
-		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		-- Setup for the Python debugger
+		-- It's important to call this before setting up the configurations
+		require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+
+		local dap, dapui = require("dap"), require("dapui")
+
+		dap.listeners.after.event_initialized["dapui_config"] = function()
+			dapui.open()
+		end
+		dap.listeners.before.event_terminated["dapui_config"] = function()
+			dapui.close()
+		end
+		dap.listeners.before.event_exited["dapui_config"] = function()
+			dapui.close()
+		end
+
+		-- Python Debugger Configuration
+		dap.configurations.python = {
+			{
+				type = "python",
+				request = "launch",
+				name = "Launch file",
+				program = "${file}", -- This will use the current file
+				pythonPath = function()
+					-- You can customize this to point to your project's virtual environment
+					return vim.fn.exepath("python")
+				end,
+			},
+		}
 
 		-- Install language specific configurations
 		local mason_packages = vim.fn.stdpath("data") .. "/mason/packages/"
@@ -148,19 +175,6 @@ return {
 		end, {})
 
 		-- JavaScript/TypeScript
-		-- First set up the adapter
-		dap.adapters["pwa-node"] = {
-			type = "server",
-			host = "localhost",
-			port = "${port}",
-			executable = {
-				command = "js-debug-adapter",
-				args = {
-					"${port}",
-				},
-			},
-		}
-
 		for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "typescriptreact" }) do
 			require("dap").configurations[language] = {
 				{
