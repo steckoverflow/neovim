@@ -1,21 +1,4 @@
--- vim.o.number = true --linenumbers
--- vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.wrap = false -- Don't wrap lines
--- vim.opt.scrolloff = 10 -- Keep lines above/below cursor
--- vim.opt.sidescrolloff = 10 --Keep lines on the side
--- vim.opt.signcolumn = "yes" --Prevents everything from shifting
--- vim.o.confirm = true
--- vim.o.list = true
--- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
--- vim.opt.cursorline = true
--- vim.opt.undofile = true
--- vim.opt.showmode = false
--- vim.o.mouse = "a"
--- vim.o.breakindent = true
--- vim.opt.cmdheight = 0
--- vim.opt.smarttab = true
--- vim.opt.smartindent = true
--- vim.opt.autoindent = true
 
 -- Set scrolloff
 vim.o.scrolloff = 15
