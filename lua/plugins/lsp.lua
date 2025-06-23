@@ -101,6 +101,7 @@ return { -- LSP Configuration & Plugins
 							c.settings.python = {}
 						end
 						c.settings.python.pythonPath = vim.fn.exepath("python")
+						c.settings.python.extraPaths = { vim.fn.getcwd() }
 					end,
 					settings = {
 						basedpyright = {
