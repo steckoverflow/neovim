@@ -10,4 +10,4 @@ require("config.keymaps")
 require("config.functions")
 
 --Colorscheme
-vim.cmd("colorscheme lytmode")
+vim.cmd("colorscheme rose-pine")
