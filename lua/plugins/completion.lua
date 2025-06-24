@@ -18,18 +18,19 @@ return {
 			"fang2hou/blink-copilot",
 			dependencies = "zbirenbaum/copilot.lua",
 		},
-		{
-			"Yu-Leo/cmp-go-pkgs",
-			enabled = vim.fn.executable("go") == 1,
-			init = function()
-				vim.api.nvim_create_autocmd({ "LspAttach" }, {
-					pattern = { "*.go" },
-					callback = function(args)
-						require("cmp_go_pkgs").init_items(args)
-					end,
-				})
-			end,
-		},
+		-- FIXME: Causes error
+		-- {
+		-- 	"Yu-Leo/cmp-go-pkgs",
+		-- 	enabled = vim.fn.executable("go") == 1,
+		-- 	init = function()
+		-- 		vim.api.nvim_create_autocmd({ "LspAttach" }, {
+		-- 			pattern = { "*.go" },
+		-- 			callback = function(args)
+		-- 				require("cmp_go_pkgs").init_items(args)
+		-- 			end,
+		-- 		})
+		-- 	end,
+		-- },
 		-- Snippet Engine
 		{
 			"L3MON4D3/LuaSnip",
