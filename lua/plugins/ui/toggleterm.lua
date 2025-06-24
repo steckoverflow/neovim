@@ -26,7 +26,7 @@ return {
 			shell = vim.o.shell,
 			auto_scroll = true,
 			float_opts = {
-				border = "curved", -- 'single' | 'double' | 'shadow' | 'curved' | ... other options
+				border = "double", -- 'single' | 'double' | 'shadow' | 'curved' | ... other options
 				width = math.floor(vim.o.columns * 0.8),
 				height = math.floor(vim.o.lines * 0.8),
 				winblend = 3,
