@@ -4,27 +4,18 @@ For every query related to libraries, frameworks, or APIs, automatically append 
 Before you use a MCP Tool, you have to clearly state which tool you are going to use. Otherwise You are fired!
 Before making changes on an existing file, view It so that you can modify them without error. Otherwise You are fired!]],
 	providers = {
-		claude = {
-			endpoint = "https://api.anthropic.com",
-			model = "claude-3-5-sonnet-20241022",
-			timeout = 30000,
-			extra_request_body = {
-				temperature = 0,
-				max_tokens = 4096,
-			},
-		},
-		copilot = { model = "claude-sonnet-4" },
-		gemini = { model = "gemini-2.5-pro-exp-03-25" },
-		groq = {
-			__inherited_from = "openai",
-			api_key_name = "GROQ_API_KEY",
-			endpoint = "https://api.groq.com/openai/v1/",
-			model = "deepseek-r1-distill-llama-70b",
-		},
-		copilot_gemini = {
-			__inherited_from = "copilot",
-			model = "gemini-2.5-pro",
-		},
+		copilot = {},
+		-- gemini = { model = "gemini-2.5-pro-exp-03-25" },
+		-- groq = {
+		-- 	__inherited_from = "openai",
+		-- 	api_key_name = "GROQ_API_KEY",
+		-- 	endpoint = "https://api.groq.com/openai/v1/",
+		-- 	model = "deepseek-r1-distill-llama-70b",
+		-- },
+		-- copilot_gemini = {
+		-- 	__inherited_from = "copilot",
+		-- 	model = "gemini-2.5-pro",
+		-- },
 	},
 	prompts = {
 		{
