@@ -12,7 +12,7 @@ return {
 			{ "<leader>r", group = "Refactor", mode = { "n", "v" } },
 			{ "<leader>s", group = "Search", mode = { "n", "v" } },
 			{ "<leader>sn", group = "Search Neovim" },
-			{ "<leader>t", group = "Test" },
+			{ "<leader>t", group = "Terminal" },
 			{ "gp", group = "Preview" },
 			{ "<leader>ap", group = "avante: prompts", mode = { "n", "v" } },
 			{ "<leader>u", group = "Ui" },

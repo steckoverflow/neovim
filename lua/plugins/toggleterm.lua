@@ -51,5 +51,8 @@ return {
 
 		-- Terminal mode toggle (so you can close from within terminal)
 		vim.keymap.set("t", "<leader>tt", "<cmd>ToggleTerm<cr>", opts)
+
+		-- Terminal mode toggle (so you can close from within terminal)
+		vim.keymap.set("t", "<leader>q", "<cmd>ToggleTerm<cr>", opts)
 	end,
 }
