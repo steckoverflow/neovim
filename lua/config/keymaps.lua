@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+map("i", "jk", "<Esc>", { desc = "Exit Insert Mode" })
+
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
