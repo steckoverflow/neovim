@@ -22,6 +22,10 @@ return {
 				"gowork",
 				"json",
 				"json5",
+				"python",
+				"sql",
+				"terraform",
+				"toml",
 				-- Copilot
 				"markdown",
 				"markdown_inline",
