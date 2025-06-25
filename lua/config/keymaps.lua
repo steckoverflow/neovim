@@ -22,7 +22,7 @@ map("n", "<leader>w", function()
 		vim.cmd.write()
 	end
 end, { desc = "Save Buffer" })
--- map("n", "<leader>x", "<cmd>wqa<CR>", { desc = "Save and Exit" })
+
 map("n", "<leader>x", function()
 	-- Close all terminal buffers first
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
