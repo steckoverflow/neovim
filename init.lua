@@ -8,6 +8,7 @@ require("config.lazy")
 require("config.options")
 require("config.keymaps")
 require("config.functions")
+require("config.diagnostics")
 
 --Colorscheme
 vim.cmd("colorscheme rose-pine")
