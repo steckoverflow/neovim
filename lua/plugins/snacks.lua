@@ -5,8 +5,7 @@ return {
 	lazy = false,
 	---@type snacks.Config
 	opts = {
-		-- TODO: Make animations nicer
-		animate = { enabled = true },
+		animate = { enabled = false },
 		bigfile = { enabled = false },
 		bufdelete = { enabled = false },
 		dashboard = {
@@ -25,15 +24,14 @@ return {
 			},
 		},
 		debug = { enabled = true },
-		dim = { enabled = true },
-		--TODO: Configure explorer
+		dim = { enabled = false },
 		explorer = { enabled = true },
 		git = { enabled = true },
 		gitbrowse = { enabled = false },
 		indent = { enabled = true },
 		input = { enabled = true },
-		layout = { enabled = true },
-		-- TODO: Configure lazygit
+		-- TODO: Look into layout for improvements
+		layout = { enabled = false },
 		lazygit = { enabled = true },
 		notifier = {
 			enabled = true,
@@ -47,15 +45,60 @@ return {
 		scope = { enabled = false },
 		scratch = { enabled = false },
 		scroll = { enabled = true },
-		statuscolumn = { enabled = true },
-		--TODO: Configure floating default
-		terminal = { enabled = true },
+		statuscolumn = {
+			enabled = true,
+			left = { "mark", "sign" },
+			git = {
+				-- patterns to match Git signs
+				patterns = { "GitSign", "MiniDiffSign" },
+			},
+			refresh = 50, -- refresh at most every 50ms
+		},
+		-- NOTE: Just use default and not floating works well with Lualine
+		terminal = {
+			-- Enable the terminal
+			enabled = true,
+			bo = {
+				filetype = "snacks_terminal",
+			},
+			wo = {},
+			keys = {
+				q = "hide",
+				gf = function(self)
+					local f = vim.fn.findfile(vim.fn.expand("<cfile>"), "**")
+					if f == "" then
+						Snacks.notify.warn("No file under cursor")
+					else
+						self:hide()
+						vim.schedule(function()
+							vim.cmd("e " .. f)
+						end)
+					end
+				end,
+				term_normal = {
+					"<esc>",
+					function(self)
+						self.esc_timer = self.esc_timer or
+						    (vim.uv or vim.loop).new_timer()
+						if self.esc_timer:is_active() then
+							self.esc_timer:stop()
+							vim.cmd("stopinsert")
+						else
+							self.esc_timer:start(200, 0, function() end)
+							return "<esc>"
+						end
+					end,
+					mode = "t",
+					expr = true,
+					desc = "Double escape to normal mode",
+				},
+			}
+		},
 		toggle = { enabled = true },
 		words = { enabled = true },
-		--TODO: Do we need util for now?
-		util = { enabled = true },
+		util = { enabled = false },
 		win = { enabled = false },
-		zen = { enabled = true },
+		zen = { enabled = false },
 	},
 	keys = {
 		-- Top Pickers & Explorer
@@ -496,19 +539,19 @@ return {
 			desc = "Dismiss All Notifications",
 		},
 		{
-			"<c-/>",
+			"<leader>t",
 			function()
 				Snacks.terminal()
 			end,
 			desc = "Toggle Terminal",
 		},
-		{
-			"<c-_>",
-			function()
-				Snacks.terminal()
-			end,
-			desc = "which_key_ignore",
-		},
+		-- {
+		-- 	"<c-_>",
+		-- 	function()
+		-- 		Snacks.terminal()
+		-- 	end,
+		-- 	desc = "which_key_ignore",
+		-- },
 		{
 			"]]",
 			function()
