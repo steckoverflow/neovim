@@ -24,7 +24,16 @@ map("n", "<leader>w", function()
 		vim.cmd.write()
 	end
 end, { desc = "Save Buffer" })
-map("n", "<leader>x", "<cmd>wqa<CR>", { desc = "Save and Exit" })
+-- map("n", "<leader>x", "<cmd>wqa<CR>", { desc = "Save and Exit" })
+map("n", "<leader>x", function()
+	-- Close all terminal buffers first
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buftype == "terminal" then
+			vim.api.nvim_buf_delete(buf, { force = true })
+		end
+	end
+	vim.cmd("wqa")
+end, { desc = "Kill terminals and exit" })
 map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit Window" })
 
 --Resize window using <ctrl> arrow keys with smart behavior
