@@ -1,4 +1,3 @@
---Presetting some things needed by for instance Lazy
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 vim.g.have_nerd_font = true
