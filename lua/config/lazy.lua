@@ -26,6 +26,11 @@ require("lazy").setup({
 		{ import = "plugins.dap" }, -- Debugging plugins
 		-- import your plugins
 		{ import = "plugins" },
+		{ import = "plugins.dap" },
+		{ import = "plugins.editor" },
+		{ import = "plugins.lsp" },
+		{ import = "plugins.themes" },
+		{ import = "plugins.ui" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

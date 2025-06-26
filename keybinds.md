@@ -1,4 +1,0 @@
-# Keybinds
-## Terminal
-
-
