@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out,                            "WarningMsg" },
+			{ out, "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -18,19 +18,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ import = "plugins.ai" }, -- ai plugins
+		-- { import = "plugins.ai" }, -- ai plugins
 		{ import = "plugins.ui" }, -- UI plugins
 		{ import = "plugins.themes" }, -- Theme plugins
 		{ import = "plugins.editor" }, -- editor enhancements
 		{ import = "plugins.lsp" }, -- LSP and completion plugins
 		{ import = "plugins.dap" }, -- Debugging plugins
-		-- import your plugins
 		{ import = "plugins" },
-		{ import = "plugins.dap" },
-		{ import = "plugins.editor" },
-		{ import = "plugins.lsp" },
-		{ import = "plugins.themes" },
-		{ import = "plugins.ui" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
