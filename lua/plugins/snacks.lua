@@ -591,6 +591,7 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "VeryLazy",
 			callback = function()
+				--
 				-- Setup some globals for debugging (lazy-loaded)
 				_G.dd = function(...)
 					Snacks.debug.inspect(...)
