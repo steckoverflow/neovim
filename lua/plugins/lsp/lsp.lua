@@ -2,19 +2,9 @@ return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		{ "mason-org/mason.nvim", opts = {} },
+		{ "mason-org/mason.nvim",           opts = {} },
 		{ "mason-org/mason-lspconfig.nvim", opts = {} },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-
-		-- For LSP actions preview
-		{ "aznhe21/actions-preview.nvim", opts = { backend = { "snacks", "nui" } } },
-
-		-- Preview for go to methods
-		{
-			"rmagatti/goto-preview",
-			opts = { default_mappings = true, references = { provider = "snacks" } },
-			event = "VeryLazy",
-		},
 
 		-- Populates project-wide lsp diagnostcs
 		"artemave/workspace-diagnostics.nvim",
@@ -29,7 +19,8 @@ return { -- LSP Configuration & Plugins
 				local map = function(keys, func, desc, mode, lsp)
 					mode = mode or "n"
 					lsp = lsp == nil and true or lsp
-					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = lsp and "LSP: " .. desc or desc })
+					vim.keymap.set(mode, keys, func,
+						{ buffer = event.buf, desc = lsp and "LSP: " .. desc or desc })
 				end
 
 				-- Opens a floating window showing hover information about the symbol under the cursor.
@@ -59,18 +50,13 @@ return { -- LSP Configuration & Plugins
 				-- Many servers do not implement this method
 				map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
 
-				-- Fuzzy find symbols in the workspace
-				map("<leader>sS", function()
-					Snacks.picker.lsp_workspace_symbols(kind_filter)
-				end, "Workspace Symbols", "n", false)
-
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
 				map("<leader>rv", vim.lsp.buf.rename, "Rename Variable", "n", false)
 
-				-- Execute a code action, usually your cursor needs to be on top of an error
-				-- or a suggestion from your LSP for this to activate.
-				map("<leader>ca", require("actions-preview").code_actions, "Code Action", { "n", "v" }) -- vim.lsp.buf.code_action
+				-- -- Execute a code action, usually your cursor needs to be on top of an error
+				-- -- or a suggestion from your LSP for this to activate.
+				-- map("<leader>ca", require("actions-preview").code_actions, "Code Action", { "n", "v" }) -- vim.lsp.buf.code_action
 			end,
 		})
 

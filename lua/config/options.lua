@@ -1,5 +1,4 @@
-vim.opt.wrap = false -- Don't wrap lines
-
+vim.o.wrap = false -- Don't wrap lines
 -- Set scrolloff
 vim.o.scrolloff = 15
 
