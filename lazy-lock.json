@@ -183,6 +183,10 @@
     "branch": "main",
     "commit": "6b9840790cc7acdfadde07f308d34b62dd9cc675"
   },
+  "smear-cursor.nvim": {
+    "branch": "main",
+    "commit": "ac5c4a8496e678ce68c1cb36df7c19e7d8c76282"
+  },
   "snacks.nvim": {
     "branch": "main",
     "commit": "bc0630e43be5699bb94dadc302c0d21615421d93"
