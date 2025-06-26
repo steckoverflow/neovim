@@ -10,7 +10,6 @@ return {
 		},
 		on_attach = function(bufnr)
 			local gitsigns = require("gitsigns")
-
 			local function map(mode, l, r, opts)
 				opts = opts or {}
 				opts.buffer = bufnr
