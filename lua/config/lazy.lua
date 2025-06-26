@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
+			{ out,                            "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -18,7 +18,15 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		-- import your plugins
+		{ import = "plugins.ai" },   -- ai plugins
+		{ import = "plugins.ui" },   -- UI plugins
+		{ import = "plugins.theme" }, -- Theme plugins
+		{ import = "plugins.editor" }, -- editor enhancements
+		{ import = "plugins.lsp" },  -- LSP and completion plugins
+		{ import = "plugins.git" },  -- Git integration plugins
+		{ import = "plugins.dap" },  -- Debugging plugins
+		{ import = "plugins.treesitter" }, -- Treesitter plugins
+		-- for uncategorized plugins, you can use a directory
 		{ import = "plugins" },
 	},
 	-- Configure any other settings here. See the documentation for more details.
