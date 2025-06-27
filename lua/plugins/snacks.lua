@@ -1,3 +1,4 @@
+local ft = { "go", "python", "lua", "javascript", "typescript", "javascriptreact", "typescriptreact" }
 ---@module 'snacks'
 return {
 	"folke/snacks.nvim",
@@ -78,8 +79,7 @@ return {
 				term_normal = {
 					"<esc>",
 					function(self)
-						self.esc_timer = self.esc_timer or
-						    (vim.uv or vim.loop).new_timer()
+						self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
 						if self.esc_timer:is_active() then
 							self.esc_timer:stop()
 							vim.cmd("stopinsert")
@@ -92,7 +92,7 @@ return {
 					expr = true,
 					desc = "Double escape to normal mode",
 				},
-			}
+			},
 		},
 		toggle = { enabled = true },
 		words = { enabled = true },
@@ -101,7 +101,89 @@ return {
 		zen = { enabled = false },
 	},
 	keys = {
-		-- Top Pickers & Explorer
+		-- ─────────────────────────────
+		-- Python virtual-env handling
+		-- ─────────────────────────────
+		{ "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv" },
+		{ "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Select VirtualEnv (cached)" },
+
+		-- ─────────────────────────────
+		-- Debug - nvim-dap
+		-- ─────────────────────────────
+		{
+			"<leader>dr",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Run/Continue",
+		},
+		{
+			"<leader>di",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Step Into",
+		},
+		{
+			"<leader>do",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Step Over",
+		},
+		{
+			"<leader>dO",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Step Out",
+		},
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Toggle Breakpoint",
+		},
+		{
+			"<leader>dB",
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+			end,
+			desc = "Set Breakpoint w/condition",
+		},
+		{
+			"<leader>dp",
+			function()
+				require("dap").pause()
+			end,
+			desc = "Pause",
+		},
+		{
+			"<leader>dt",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Terminate",
+		},
+		{
+			"<leader>dR",
+			function()
+				require("dapui").toggle()
+			end,
+			desc = "DAP-UI Toggle",
+		},
+		{
+			"<leader>de",
+			function()
+				require("dapui").eval()
+			end,
+			desc = "Eval",
+		},
+
+		-- ─────────────────────────────
+		-- Pickers & explorer
+		-- ─────────────────────────────
 		{
 			"<leader><space>",
 			function()
@@ -131,11 +213,11 @@ return {
 			desc = "Command History",
 		},
 		{
-			"<leader>n",
+			"<leader>uN",
 			function()
 				Snacks.picker.notifications()
 			end,
-			desc = "Notification History",
+			desc = "Notification Picker",
 		},
 		{
 			"<leader>e",
@@ -144,6 +226,7 @@ return {
 			end,
 			desc = "File Explorer",
 		},
+
 		-- find
 		{
 			"<leader>fb",
@@ -187,7 +270,8 @@ return {
 			end,
 			desc = "Recent",
 		},
-		-- git
+
+		-- git-related pickers
 		{
 			"<leader>gb",
 			function()
@@ -237,7 +321,8 @@ return {
 			end,
 			desc = "Git Log File",
 		},
-		-- Grep
+
+		-- grep / search
 		{
 			"<leader>sb",
 			function()
@@ -264,10 +349,11 @@ return {
 			function()
 				Snacks.picker.grep_word()
 			end,
-			desc = "Visual selection or word",
+			desc = "Grep Word",
 			mode = { "n", "x" },
 		},
-		-- search
+
+		-- misc search helpers
 		{
 			'<leader>s"',
 			function()
@@ -288,13 +374,6 @@ return {
 				Snacks.picker.autocmds()
 			end,
 			desc = "Autocmds",
-		},
-		{
-			"<leader>sb",
-			function()
-				Snacks.picker.lines()
-			end,
-			desc = "Buffer Lines",
 		},
 		{
 			"<leader>sc",
@@ -385,7 +464,7 @@ return {
 			function()
 				Snacks.picker.lazy()
 			end,
-			desc = "Search for Plugin Spec",
+			desc = "Search Plugin Spec",
 		},
 		{
 			"<leader>sq",
@@ -399,7 +478,7 @@ return {
 			function()
 				Snacks.picker.resume()
 			end,
-			desc = "Resume",
+			desc = "Resume Picker",
 		},
 		{
 			"<leader>su",
@@ -415,7 +494,10 @@ return {
 			end,
 			desc = "Colorschemes",
 		},
-		-- LSP
+
+		-- ─────────────────────────────
+		-- LSP navigation
+		-- ─────────────────────────────
 		{
 			"gd",
 			function()
@@ -450,7 +532,7 @@ return {
 			function()
 				Snacks.picker.lsp_type_definitions()
 			end,
-			desc = "Goto T[y]pe Definition",
+			desc = "Goto Type Definition",
 		},
 		{
 			"<leader>ss",
@@ -464,9 +546,12 @@ return {
 			function()
 				Snacks.picker.lsp_workspace_symbols()
 			end,
-			desc = "LSP Workspace Symbols",
+			desc = "Workspace Symbols",
 		},
-		-- Other
+
+		-- ─────────────────────────────
+		-- Misc / UI
+		-- ─────────────────────────────
 		{
 			"<leader>z",
 			function()
@@ -536,7 +621,7 @@ return {
 			function()
 				Snacks.notifier.hide()
 			end,
-			desc = "Dismiss All Notifications",
+			desc = "Dismiss Notifications",
 		},
 		{
 			"<leader>t",
@@ -545,13 +630,8 @@ return {
 			end,
 			desc = "Toggle Terminal",
 		},
-		-- {
-		-- 	"<c-_>",
-		-- 	function()
-		-- 		Snacks.terminal()
-		-- 	end,
-		-- 	desc = "which_key_ignore",
-		-- },
+
+		-- Jump between word references created by Snacks.words
 		{
 			"]]",
 			function()
@@ -568,23 +648,116 @@ return {
 			desc = "Prev Reference",
 			mode = { "n", "t" },
 		},
+
+		-- Neovim news window
 		{
 			"<leader>N",
-			desc = "Neovim News",
 			function()
 				Snacks.win({
 					file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
 					width = 0.6,
 					height = 0.6,
-					wo = {
-						spell = false,
-						wrap = false,
-						signcolumn = "yes",
-						statuscolumn = " ",
-						conceallevel = 3,
-					},
+					wo = { spell = false, wrap = false, signcolumn = "yes", statuscolumn = " ", conceallevel = 3 },
 				})
 			end,
+			desc = "Neovim News",
+		},
+
+		-- ─────────────────────────────
+		-- GitSigns
+		-- ─────────────────────────────
+		{
+			"]c",
+			function()
+				require("gitsigns").nav_hunk("next")
+			end,
+			desc = "Next Git Hunk",
+		},
+		{
+			"[c",
+			function()
+				require("gitsigns").nav_hunk("prev")
+			end,
+			desc = "Prev Git Hunk",
+		},
+		{
+			"<leader>hs",
+			function()
+				require("gitsigns").stage_hunk()
+			end,
+			desc = "Stage Hunk",
+			mode = { "n", "v" },
+		},
+		{
+			"<leader>hr",
+			function()
+				require("gitsigns").reset_hunk()
+			end,
+			desc = "Reset Hunk",
+			mode = { "n", "v" },
+		},
+		{
+			"<leader>hS",
+			function()
+				require("gitsigns").stage_buffer()
+			end,
+			desc = "Stage Buffer",
+		},
+		{
+			"<leader>hu",
+			function()
+				require("gitsigns").undo_stage_hunk()
+			end,
+			desc = "Undo Stage Hunk",
+		},
+		{
+			"<leader>hR",
+			function()
+				require("gitsigns").reset_buffer()
+			end,
+			desc = "Reset Buffer",
+		},
+		{
+			"<leader>hp",
+			function()
+				require("gitsigns").preview_hunk()
+			end,
+			desc = "Preview Hunk",
+		},
+		{
+			"<leader>hb",
+			function()
+				require("gitsigns").blame_line({ full = true })
+			end,
+			desc = "Full Blame Line",
+		},
+		{
+			"<leader>tb",
+			function()
+				require("gitsigns").toggle_current_line_blame()
+			end,
+			desc = "Toggle Line Blame",
+		},
+		{
+			"<leader>hd",
+			function()
+				require("gitsigns").diffthis()
+			end,
+			desc = "Diff This",
+		},
+		{
+			"<leader>hD",
+			function()
+				require("gitsigns").diffthis("~")
+			end,
+			desc = "Diff This ~",
+		},
+		{
+			"<leader>td",
+			function()
+				require("gitsigns").toggle_deleted()
+			end,
+			desc = "Toggle Deleted",
 		},
 	},
 	init = function()
@@ -608,13 +781,12 @@ return {
 				Snacks.toggle.diagnostics():map("<leader>ud")
 				Snacks.toggle.line_number():map("<leader>ul")
 				Snacks.toggle
-				    .option("conceallevel",
-					    { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-				    :map("<leader>uc")
+					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+					:map("<leader>uc")
 				Snacks.toggle.treesitter():map("<leader>uT")
 				Snacks.toggle
-				    .option("background", { off = "light", on = "dark", name = "Dark Background" })
-				    :map("<leader>ub")
+					.option("background", { off = "light", on = "dark", name = "Dark Background" })
+					:map("<leader>ub")
 				Snacks.toggle.inlay_hints():map("<leader>uh")
 				Snacks.toggle.indent():map("<leader>ug")
 				Snacks.toggle.dim():map("<leader>uD")

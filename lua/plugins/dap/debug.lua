@@ -1,4 +1,4 @@
-local ft = { "go", "python", "lua", "javascript", "typescript", "javascriptreact", "typescriptreact" }
+-- local ft = { "go", "python", "lua", "javascript", "typescript", "javascriptreact", "typescriptreact" }
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -15,101 +15,100 @@ return {
 		"nvim-neotest/nvim-nio", -- "jbyuki/one-small-step-for-vimkind", -- Neovim
 		{
 			"microsoft/vscode-js-debug",
-			build =
-			"npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
-			version = "1.*"
+			build = "npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+			version = "1.*",
 		},
 		{
 			"mxsdev/nvim-dap-vscode-js",
 			opts = {
 				debugger_path = vim.fn.resolve(vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"),
-				adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "pwa-extensionHost", "node-terminal" }
-			}
-		}
-	},
-	keys = {
-		-- Basic debugging keymaps, feel free to change to your liking!
-		{
-			"<leader>dr",
-			function()
-				require("dap").continue()
-			end,
-			desc = "Run/Continue",
-			ft = ft,
-		},
-		{
-			"<leader>di",
-			function()
-				require("dap").step_into()
-			end,
-			desc = "Step Into",
-			ft = ft,
-		},
-		{
-			"<leader>do",
-			function()
-				require("dap").step_over()
-			end,
-			desc = "Step Over",
-			ft = ft,
-		},
-		{
-			"<leader>dO",
-			function()
-				require("dap").step_out()
-			end,
-			desc = "Step Out",
-			ft = ft,
-		},
-		{
-			"<leader>db",
-			function()
-				require("dap").toggle_breakpoint()
-			end,
-			desc = "Toggle Breakpoint",
-			ft = ft,
-		},
-		{
-			"<leader>dB",
-			function()
-				require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			end,
-			desc = "Set Breakpoint w/condition",
-			ft = ft,
-		},
-		{
-			"<Leader>dp",
-			function()
-				require("dap").pause()
-			end,
-			desc = "Pause",
-			ft = ft,
-		},
-		{
-			"<leader>dt",
-			function()
-				require("dap").terminate()
-			end,
-			desc = "Terminate",
-			ft = ft,
-		},
-		{
-			"<Leader>dR",
-			function()
-				require("dapui").toggle()
-			end,
-			desc = "Last Session Results",
-			ft = ft,
-		},
-		{
-			"<leader>de",
-			function()
-				require("dapui").eval()
-			end,
-			desc = "Eval",
-			ft = ft,
+				adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "pwa-extensionHost", "node-terminal" },
+			},
 		},
 	},
+	-- keys = {
+	-- 	-- Basic debugging keymaps, feel free to change to your liking!
+	-- 	{
+	-- 		"<leader>dr",
+	-- 		function()
+	-- 			require("dap").continue()
+	-- 		end,
+	-- 		desc = "Run/Continue",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>di",
+	-- 		function()
+	-- 			require("dap").step_into()
+	-- 		end,
+	-- 		desc = "Step Into",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>do",
+	-- 		function()
+	-- 			require("dap").step_over()
+	-- 		end,
+	-- 		desc = "Step Over",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>dO",
+	-- 		function()
+	-- 			require("dap").step_out()
+	-- 		end,
+	-- 		desc = "Step Out",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>db",
+	-- 		function()
+	-- 			require("dap").toggle_breakpoint()
+	-- 		end,
+	-- 		desc = "Toggle Breakpoint",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>dB",
+	-- 		function()
+	-- 			require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+	-- 		end,
+	-- 		desc = "Set Breakpoint w/condition",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<Leader>dp",
+	-- 		function()
+	-- 			require("dap").pause()
+	-- 		end,
+	-- 		desc = "Pause",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>dt",
+	-- 		function()
+	-- 			require("dap").terminate()
+	-- 		end,
+	-- 		desc = "Terminate",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<Leader>dR",
+	-- 		function()
+	-- 			require("dapui").toggle()
+	-- 		end,
+	-- 		desc = "Last Session Results",
+	-- 		ft = ft,
+	-- 	},
+	-- 	{
+	-- 		"<leader>de",
+	-- 		function()
+	-- 			require("dapui").eval()
+	-- 		end,
+	-- 		desc = "Eval",
+	-- 		ft = ft,
+	-- 	},
+	-- },
 	config = function()
 		require("dapui").setup()
 		require("dap-go").setup()
