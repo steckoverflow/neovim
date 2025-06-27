@@ -3,7 +3,10 @@ vim.o.wrap = false -- Don't wrap lines
 vim.o.scrolloff = 15
 
 -- Set tab width
-vim.o.tabstop = 4
+vim.o.tabstop = 2
+-- vim.o.list = true
+-- vim.o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.o.expandtab = true
 
 -- Set highlight on search
 vim.o.hlsearch = false
