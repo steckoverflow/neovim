@@ -3,7 +3,7 @@ return {
 	name = "rose-pine",
 	opts = {
 		styles = {
-			transparency = true,
+			transparency = false,
 		},
 	},
 }
