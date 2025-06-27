@@ -2,7 +2,7 @@ return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for neovim
-		{ "mason-org/mason.nvim",           opts = {} },
+		{ "mason-org/mason.nvim", opts = {} },
 		{ "mason-org/mason-lspconfig.nvim", opts = {} },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -16,47 +16,47 @@ return { -- LSP Configuration & Plugins
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 			callback = function(event)
-				local map = function(keys, func, desc, mode, lsp)
-					mode = mode or "n"
-					lsp = lsp == nil and true or lsp
-					vim.keymap.set(mode, keys, func,
-						{ buffer = event.buf, desc = lsp and "LSP: " .. desc or desc })
-				end
-
-				-- Opens a floating window showing hover information about the symbol under the cursor.
-				--  This includes documentation, type information, and other details provided by the LSP.
-				map("K", vim.lsp.buf.hover, "Display Hover Information")
-
-				---@module 'snacks'
-				-- Jump to the definition of the word under your cursor.
-				--  This is where a variable was first declared, or where a function is defined, etc.
-				--  To jump back, press <C-t>.
-				map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
-
-				-- Find references for the word under your cursor.
-				map("gr", Snacks.picker.lsp_references, "References")
-
-				-- Jump to the implementation of the word under your cursor.
-				--  Useful when your language has ways of declaring types without an actual implementation.
-				map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
-
-				-- Jump to the type of the word under your cursor.
-				--  Useful when you're not sure what type a variable is and you want to see
-				--  the definition of its *type*, not where it was *defined*.
-				map("gy", Snacks.picker.lsp_type_definitions, "Goto Type Definition")
-
-				-- This is not Goto Definition, this is Goto Declaration.
-				-- For example, in C this would take you to the header
-				-- Many servers do not implement this method
-				map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
-
-				-- Rename the variable under your cursor
-				--  Most Language Servers support renaming across files, etc.
-				map("<leader>rv", vim.lsp.buf.rename, "Rename Variable", "n", false)
-
-				-- -- Execute a code action, usually your cursor needs to be on top of an error
-				-- -- or a suggestion from your LSP for this to activate.
-				-- map("<leader>ca", require("actions-preview").code_actions, "Code Action", { "n", "v" }) -- vim.lsp.buf.code_action
+				-- local map = function(keys, func, desc, mode, lsp)
+				-- 	mode = mode or "n"
+				-- 	lsp = lsp == nil and true or lsp
+				-- 	vim.keymap.set(mode, keys, func,
+				-- 		{ buffer = event.buf, desc = lsp and "LSP: " .. desc or desc })
+				-- end
+				--
+				-- -- Opens a floating window showing hover information about the symbol under the cursor.
+				-- --  This includes documentation, type information, and other details provided by the LSP.
+				-- map("K", vim.lsp.buf.hover, "Display Hover Information")
+				--
+				-- ---@module 'snacks'
+				-- -- Jump to the definition of the word under your cursor.
+				-- --  This is where a variable was first declared, or where a function is defined, etc.
+				-- --  To jump back, press <C-t>.
+				-- map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
+				--
+				-- -- Find references for the word under your cursor.
+				-- map("gr", Snacks.picker.lsp_references, "References")
+				--
+				-- -- Jump to the implementation of the word under your cursor.
+				-- --  Useful when your language has ways of declaring types without an actual implementation.
+				-- map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
+				--
+				-- -- Jump to the type of the word under your cursor.
+				-- --  Useful when you're not sure what type a variable is and you want to see
+				-- --  the definition of its *type*, not where it was *defined*.
+				-- map("gy", Snacks.picker.lsp_type_definitions, "Goto Type Definition")
+				--
+				-- -- This is not Goto Definition, this is Goto Declaration.
+				-- -- For example, in C this would take you to the header
+				-- -- Many servers do not implement this method
+				-- map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
+				--
+				-- -- Rename the variable under your cursor
+				-- --  Most Language Servers support renaming across files, etc.
+				-- map("<leader>rv", vim.lsp.buf.rename, "Rename Variable", "n", false)
+				--
+				-- -- -- Execute a code action, usually your cursor needs to be on top of an error
+				-- -- -- or a suggestion from your LSP for this to activate.
+				-- -- map("<leader>ca", require("actions-preview").code_actions, "Code Action", { "n", "v" }) -- vim.lsp.buf.code_action
 			end,
 		})
 
