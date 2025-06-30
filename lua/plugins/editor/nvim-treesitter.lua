@@ -4,6 +4,8 @@ return {
 	config = function()
 		local configs = require("nvim-treesitter.configs")
 		configs.setup({
+			modules = {},
+			ignore_install = {},
 			ensure_installed = {
 				"lua",
 				"vim",
@@ -30,11 +32,15 @@ return {
 				"markdown",
 				"markdown_inline",
 				"yaml",
+				-- Godot
+				"gdscript",
+				"glsl",
+				"godot_resource",
 			},
 			auto_install = false,
 			sync_install = false,
 			highlight = { enable = true },
-			indent = { enable = true },
+			-- indent = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {

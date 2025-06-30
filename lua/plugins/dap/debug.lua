@@ -143,6 +143,22 @@ return {
 			},
 		}
 
+		-- Godot Debugger Configuration
+		dap.adapters.godot = {
+			type = "server",
+			host = "127.0.0.1",
+			port = vim.env.GDScript_Debug_Port or 6006,
+		}
+		dap.configurations.gdscript = {
+			{
+				type = "godot",
+				request = "launch",
+				name = "Launch scene",
+				project = "${workspaceFolder}",
+				launch_scene = true,
+			},
+		}
+
 		-- Install language specific configurations
 		local mason_packages = vim.fn.stdpath("data") .. "/mason/packages/"
 
