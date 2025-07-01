@@ -1,13 +1,26 @@
 vim.diagnostic.config({
-	virtual_text = {
-		enabled = true,
-		source = "if_many", -- Show source if multiple LSPs are attached
-		spacing = 4, -- Number of spaces after diagnostics
-		prefix = "●", -- Character to show before the diagnostic message
-		severity_sort = true -- Sort by severity
-	},
-	signs = true, -- Show signs in the sign column
-	underline = true, -- Underline diagnostic text
-	update_in_insert = false, -- Don't update diagnostics while typing
 	severity_sort = true,
+	float = { border = "rounded", source = "if_many" },
+	underline = { severity = vim.diagnostic.severity.ERROR },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅚 ",
+			[vim.diagnostic.severity.WARN] = "󰀪 ",
+			[vim.diagnostic.severity.INFO] = "󰋽 ",
+			[vim.diagnostic.severity.HINT] = "󰌶 ",
+		},
+	},
+	virtual_text = {
+		source = "if_many",
+		spacing = 2,
+		format = function(diagnostic)
+			local diagnostic_message = {
+				[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				[vim.diagnostic.severity.WARN] = diagnostic.message,
+				[vim.diagnostic.severity.INFO] = diagnostic.message,
+				[vim.diagnostic.severity.HINT] = diagnostic.message,
+			}
+			return diagnostic_message[diagnostic.severity]
+		end,
+	},
 })

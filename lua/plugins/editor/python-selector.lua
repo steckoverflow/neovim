@@ -5,8 +5,4 @@ return {
 	config = function()
 		require("venv-selector").setup({})
 	end,
-	-- keys = {
-	-- 	{ "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv" },
-	-- 	{ "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Select VirtualEnv (cached)" },
-	-- },
 }

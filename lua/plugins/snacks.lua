@@ -1,5 +1,3 @@
-local ft = { "go", "python", "lua", "javascript", "typescript", "javascriptreact", "typescriptreact" }
----@module 'snacks'
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -787,7 +785,6 @@ return {
 				Snacks.toggle
 					.option("background", { off = "light", on = "dark", name = "Dark Background" })
 					:map("<leader>ub")
-				Snacks.toggle.inlay_hints():map("<leader>uh")
 				Snacks.toggle.indent():map("<leader>ug")
 				Snacks.toggle.dim():map("<leader>uD")
 			end,

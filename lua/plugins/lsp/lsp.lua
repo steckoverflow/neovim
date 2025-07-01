@@ -14,11 +14,53 @@ return { -- LSP Configuration & Plugins
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
-		})
+			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+			callback = function(event)
+				local map = function(keys, func, desc, mode)
+					mode = mode or "n"
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+				end
+				map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+				map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
 
+				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				if
+					client
+					and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+				then
+					local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+						buffer = event.buf,
+						group = highlight_augroup,
+						callback = vim.lsp.buf.document_highlight,
+					})
+
+					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+						buffer = event.buf,
+						group = highlight_augroup,
+						callback = vim.lsp.buf.clear_references,
+					})
+
+					vim.api.nvim_create_autocmd("LspDetach", {
+						group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
+						callback = function(event2)
+							vim.lsp.buf.clear_references()
+							vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
+						end,
+					})
+				end
+
+				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+					map("<leader>th", function()
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+					end, "[T]oggle Inlay [H]ints")
+				end
+			end,
+		})
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		local servers = {
 			mason = {
+				stylua = {},
 				bashls = {},
 				dockerls = {},
 				jsonls = {},
@@ -72,12 +114,6 @@ return { -- LSP Configuration & Plugins
 				iferr = {},
 				impl = {},
 				goimports = {},
-				gdscript = {
-					cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-					filetypes = { "gd", "gdscript", "gdscript3" },
-					root_markers = { ".git", "gdscript.toml" },
-					single_file_support = true,
-				},
 			},
 			-- This table contains config for all language servers that are *not* installed via Mason.
 			-- Structure is identical to the mason table from above.
@@ -108,6 +144,8 @@ return { -- LSP Configuration & Plugins
 			vim.lsp.enable(vim.tbl_keys(servers.others))
 		end
 
+		require("lspconfig").gdscript.setup({})
+
 		-- add workspace-diagnostics to all LSPs
 		vim.lsp.config("*", {
 			on_attach = function(client, bufnr)
@@ -120,5 +158,16 @@ return { -- LSP Configuration & Plugins
 		-- local tools = require("kickstart.mason-tools")
 		-- vim.list_extend(ensure_installed, tools)
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+		require("mason-lspconfig").setup({
+			ensure_installed = {},
+			automatic_installation = false,
+			handlers = {
+				function(server_name)
+					local server = servers[server_name] or {}
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					require("lspconfig")[server_name].setup(server)
+				end,
+			},
+		})
 	end,
 }
