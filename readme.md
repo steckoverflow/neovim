@@ -11,52 +11,31 @@ This is a modular Neovim configuration written in Lua, designed for productivity
 - Modern statusline and UI enhancements
 - Python virtual environment selector
 - Fuzzy finding and search
-- Markdown and documentation tools
 
-## Plugin Overview
+To disable or enable features based on language edit the lua/config/userconfig.lua file
+```lua
+---@class Extras
+---@field enable_godot boolean Enable Godot support
+---@field debug boolean If true prints configuration when loading
 
-| Category      | Plugin(s) / Description                                                                 |
-|---------------|----------------------------------------------------------------------------------------|
-| **AI/Code Assistant** | `yetone/avante.nvim`, `zbirenbaum/copilot.lua`, `ravitemer/mcphub.nvim` (AI, Copilot, MCP Hub) |
-| **LSP & Completion**  | `neovim/nvim-lspconfig`, `mason-org/mason.nvim`, `folke/snacks.nvim`, `saghen/blink.cmp`, `L3MON4D3/LuaSnip`, `Kaiser-Yang/blink-cmp-avante`, etc. |
-| **Debugging (DAP)**   | `mfussenegger/nvim-dap`, `rcarriga/nvim-dap-ui`, `leoluz/nvim-dap-go`, `mfussenegger/nvim-dap-python`, `linux-cultist/venv-selector.nvim` |
-| **Git**               | `kdheepak/lazygit.nvim`                                                          |
-| **UI**                | `nvim-lualine/lualine.nvim` (statusline), `folke/which-key.nvim`, `noice.nvim`, `toggleterm.nvim`, `snacks.nvim`, `rainbow-delimiters.nvim`, `indent-blankline.nvim` |
-| **Editor**            | `windwp/nvim-autopairs`, `nmac427/guess-indent.nvim`, `folke/todo-comments.nvim`      |
-| **Fuzzy Finder**      | `nvim-telescope/telescope.nvim`, `telescope-fzf-native`, `telescope-ui-select`       |
-| **Treesitter**        | `nvim-treesitter/nvim-treesitter`, `nvim-treesitter-textobjects`                   |
-| **Markdown**          | `magnusriga/markdown-tools.nvim`                                                 |
-| **Python Env Select** | `linux-cultist/venv-selector.nvim`                                               |
-| **Themes**            | `rose-pine`, and others                                                          |
+---@class UserConfig
+---@field languages string[] List of programming languages to enable in treesitter, mason, debugging
+---@field extras Extras
 
-## Directory Structure
+local M = {}
 
+---@type UserConfig
+M.config = {
+	languages = {
+		"python",
+		"golang",
+		"web", --javascript, typescript
+	},
+	extras = {
+		enable_godot = true,
+		debug = false,
+	},
+}
+
+return M
 ```
-.
-├── init.lua
-├── lua/
-│   ├── config/         # Core config (options, keymaps, etc)
-│   ├── plugins/        # All plugin configs, grouped by category
-│   │   ├── ai/
-│   │   ├── dap/
-│   │   ├── editor/
-│   │   ├── git/
-│   │   ├── lsp/
-│   │   ├── markdown-tools.lua
-│   │   ├── snacks.lua
-│   │   ├── telescope.lua
-│   │   ├── theme/
-│   │   ├── treesitter/
-│   │   └── ui/
-│   └── ...
-├── lazy-lock.json
-└── ...
-```
-
-## Getting Started
-
-1. Clone this repo into your Neovim config directory.
-2. Open Neovim and run `:Lazy sync` to install plugins.
-3. Explore the `lua/plugins/` directory to customize features.
-
----

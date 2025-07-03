@@ -3,41 +3,57 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
-		configs.setup({
-			modules = {},
-			ignore_install = {},
-			ensure_installed = {
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"javascript",
-				"html",
-				"bash",
-				"css",
-				"csv",
-				"dockerfile",
-				"dot",
+		local ensure_installed = {
+			"lua",
+			"vim",
+			"vimdoc",
+			"query",
+			"javascript",
+			"html",
+			"bash",
+			"css",
+			"csv",
+			"dockerfile",
+			"dot",
+			"json",
+			"json5",
+			"sql",
+			"terraform",
+			"toml",
+			-- Copilot
+			"markdown",
+			"markdown_inline",
+			"yaml",
+		}
+		-- Add Golang parsers if Golang is enabled
+		if vim.tbl_contains(_G["userconfig"].languages, "golang") then
+			vim.list_extend(ensure_installed, {
 				"go",
 				"gomod",
 				"gosum",
 				"gowork",
-				"json",
-				"json5",
+			})
+		end
+		-- Add Python parsers if Python is enabled
+		if vim.tbl_contains(_G["userconfig"].languages, "python") then
+			vim.list_extend(ensure_installed, {
 				"python",
-				"sql",
-				"terraform",
-				"toml",
-				-- Copilot
-				"markdown",
-				"markdown_inline",
-				"yaml",
-				-- Godot
+			})
+		end
+		-- Godot
+		if _G["userconfig"].extras.enable_godot then
+			vim.list_extend(ensure_installed, {
 				"gdscript",
 				"gdshader",
 				"glsl",
 				"godot_resource",
-			},
+			})
+		end
+
+		configs.setup({
+			modules = {},
+			ignore_install = {},
+			ensure_installed = ensure_installed,
 			auto_install = false,
 			sync_install = false,
 			highlight = { enable = true },

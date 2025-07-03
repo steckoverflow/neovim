@@ -35,3 +35,7 @@ map("n", "<leader>x", function()
 	vim.cmd("wqa")
 end, { desc = "Kill terminals and exit" })
 map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit Window" })
+
+-- Split window keymaps
+vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
+vim.keymap.set("n", "<leader>,", ":split<CR>", { desc = "Horizontal split" })
