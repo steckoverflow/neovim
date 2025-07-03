@@ -16,7 +16,7 @@ M.config = {
 		"web", --javascript, typescript
 	},
 	extras = {
-		enable_godot = true,
+		enable_godot = false,
 		debug = false,
 	},
 }
