@@ -158,11 +158,11 @@ return {
 			desc = "Pause",
 		},
 		{
-			"<leader>dt",
+			"<leader>dq",
 			function()
 				require("dap").terminate()
 			end,
-			desc = "Terminate",
+			desc = "[q]uit Debugging",
 		},
 		{
 			"<leader>dR",
@@ -231,14 +231,14 @@ return {
 			function()
 				Snacks.picker.buffers()
 			end,
-			desc = "Buffers",
+			desc = "[f]ind [b]uffers",
 		},
 		{
 			"<leader>fc",
 			function()
 				Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 			end,
-			desc = "Find Config File",
+			desc = "[f]ind [c]onfig File",
 		},
 		{
 			"<leader>ff",
@@ -267,6 +267,36 @@ return {
 				Snacks.picker.recent()
 			end,
 			desc = "Recent",
+		},
+		-- grep / search
+		{
+			"<leader>fB",
+			function()
+				Snacks.picker.lines()
+			end,
+			desc = "Buffer Lines",
+		},
+		{
+			"<leader>fgb",
+			function()
+				Snacks.picker.grep_buffers()
+			end,
+			desc = "Grep Open Buffers",
+		},
+		{
+			"<leader>fg",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Grep",
+		},
+		{
+			"<leader>fw",
+			function()
+				Snacks.picker.grep_word()
+			end,
+			desc = "Grep Word",
+			mode = { "n", "x" },
 		},
 
 		-- git-related pickers
@@ -319,38 +349,6 @@ return {
 			end,
 			desc = "Git Log File",
 		},
-
-		-- grep / search
-		{
-			"<leader>sb",
-			function()
-				Snacks.picker.lines()
-			end,
-			desc = "Buffer Lines",
-		},
-		{
-			"<leader>sB",
-			function()
-				Snacks.picker.grep_buffers()
-			end,
-			desc = "Grep Open Buffers",
-		},
-		{
-			"<leader>sg",
-			function()
-				Snacks.picker.grep()
-			end,
-			desc = "Grep",
-		},
-		{
-			"<leader>sw",
-			function()
-				Snacks.picker.grep_word()
-			end,
-			desc = "Grep Word",
-			mode = { "n", "x" },
-		},
-
 		-- misc search helpers
 		{
 			'<leader>s"',

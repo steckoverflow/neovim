@@ -11,6 +11,15 @@ This is a modular Neovim configuration written in Lua, designed for productivity
 - Modern statusline and UI enhancements
 - Python virtual environment selector
 - Fuzzy finding and search
+- Terminal integration
+
+## Required software
+Note: Might not be complete.
+- Git
+- Curl
+- Ripgrep
+- Lua, Luarocks
+- Lazygit 
 
 To disable or enable features based on language edit the lua/config/userconfig.lua file
 ```lua

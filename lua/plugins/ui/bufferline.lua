@@ -4,6 +4,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		options = {
+			always_show_bufferline = true,
 			close_command = function(n)
 				Snacks.bufdelete(n)
 			end,
@@ -11,7 +12,6 @@ return {
 				Snacks.bufdelete(n)
 			end,
 			diagnostics = "nvim_lsp",
-			always_show_bufferline = false,
 			offsets = {
 				{
 					filetype = "neo-tree",
