@@ -8,6 +8,17 @@ return {
 			lua = { "stylua" },
 		}
 
+		if vim.tbl_contains(_G["userconfig"].languages, "web") then
+			formatters_by_ft.javascript = { "biome", "eslint_d", "prettier" }
+			formatters_by_ft.javascriptreact = { "biome", "eslint_d", "prettier" }
+			formatters_by_ft.typescript = { "biome", "eslint_d", "prettier" }
+			formatters_by_ft.typescriptreact = { "biome", "eslint_d", "prettier" }
+			formatters_by_ft.svelte = { "biome", "eslint_d", "prettier" }
+			formatters_by_ft.css = { "biome", "prettier" }
+			formatters_by_ft.scss = { "biome", "prettier" }
+			formatters_by_ft.html = { "biome", "prettier" }
+			formatters_by_ft.json = { "biome", "prettier" }
+		end
 		-- Add Golang formatters if Golang is enabled
 		if vim.tbl_contains(_G["userconfig"].languages, "Golang") then
 			formatters_by_ft.go = { "goimports", lsp_format = "last" }

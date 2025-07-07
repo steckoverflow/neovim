@@ -126,6 +126,9 @@ M.config = function()
 	end
 
 	if vim.tbl_contains(_G["userconfig"].languages, "web") then
+		servers.mason.tailwindcss = {}
+		servers.mason.cssls = {}
+		servers.mason.svelte = {}
 		---@param command string?
 		local function skip_lsp(command)
 			return not (command == nil or vim.fn.executable(command) == 1)
