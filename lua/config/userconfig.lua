@@ -14,6 +14,7 @@ M.config = {
 		"python",
 		"golang",
 		"web", --javascript, typescript
+		"sql",
 	},
 	extras = {
 		enable_godot = false,

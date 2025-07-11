@@ -15,17 +15,20 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local imports = {
+	{ import = "plugins.ai" }, -- AI plugins
+	{ import = "plugins.ui" }, -- UI plugins
+	{ import = "plugins.themes" }, -- Theme plugins
+	{ import = "plugins.editor" }, -- Editor enhancements
+	{ import = "plugins.lsp" }, -- LSP and completion plugins
+	{ import = "plugins.dap" }, -- Debugging plugins
+	{ import = "plugins.sql" }, -- SQL plugins
+	{ import = "plugins" },
+}
+
 -- Setup lazy.nvim
 require("lazy").setup({
-	spec = {
-		{ import = "plugins.ai" }, -- ai plugins
-		{ import = "plugins.ui" }, -- UI plugins
-		{ import = "plugins.themes" }, -- Theme plugins
-		{ import = "plugins.editor" }, -- editor enhancements
-		{ import = "plugins.lsp" }, -- LSP and completion plugins
-		{ import = "plugins.dap" }, -- Debugging plugins
-		{ import = "plugins" },
-	},
+	spec = imports,
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
 	install = { colorscheme = { "habamax" } },

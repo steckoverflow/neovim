@@ -39,3 +39,9 @@ map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit Window" })
 -- Split window keymaps
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>,", ":split<CR>", { desc = "Horizontal split" })
+
+--SQL
+vim.keymap.set("n", "<leader>Db", ":DBUI<CR>", { desc = "Open Database UI" })
+vim.keymap.set("n", "<leader>Dt", ":DBUIToggle<CR>", { desc = "Toggle Database UI" })
+vim.keymap.set("n", "<leader>Da", ":DBUIAddConnection<CR>", { desc = "Add Database Connection" })
+vim.keymap.set("n", "<leader>Df", ":DBUIFindBuffer<CR>", { desc = "Find Database Buffer" })
