@@ -22,4 +22,4 @@ if _G.userconfig.extras.enable_godot then
 end
 
 --Colorscheme
-vim.cmd("colorscheme rose-pine-dawn")
+vim.cmd("colorscheme rose-pine")
