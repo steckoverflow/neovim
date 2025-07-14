@@ -12,7 +12,8 @@ return {
 			"html",
 			"bash",
 			"css",
-			"csv",
+			-- NOTE: Enable via userprofile data processing instead. Conflicts with rainbow csv plugin
+			-- "csv",
 			"dockerfile",
 			"dot",
 			"json",
