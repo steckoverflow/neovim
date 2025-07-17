@@ -4,12 +4,14 @@
 
 ---@class UserConfig
 ---@field languages string[] List of programming languages to enable in treesitter, mason, debugging
+---@field colorscheme string
 ---@field extras Extras
 
 local M = {}
 
 ---@type UserConfig
 M.config = {
+	colorscheme = "tokyonight",
 	languages = {
 		"python",
 		"golang",
