@@ -7,7 +7,12 @@ M = {
 		{ "mason-org/mason.nvim", opts = {} },
 		{ "mason-org/mason-lspconfig.nvim", opts = {} },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		"artemave/workspace-diagnostics.nvim", -- Populates project-wide lsp diagnostcs
+		{
+			"artemave/workspace-diagnostics.nvim",
+			config = function()
+				require("patches.workspace_diagnostics")
+			end,
+		}, -- Populates project-wide lsp diagnostcs
 		"folke/snacks.nvim", -- Provides keymaps for LSP actions
 	},
 }
@@ -129,24 +134,6 @@ M.config = function()
 		servers.mason.tailwindcss = {}
 		servers.mason.cssls = {}
 		servers.mason.svelte = {}
-		---@param command string?
-		local function skip_lsp(command)
-			return not (command == nil or vim.fn.executable(command) == 1)
-		end
-
-		-- Configure Servers
-		vim.lsp.enable("ts_ls", false) -- typescript-tools is used instead
-		for server, config in pairs(vim.tbl_extend("keep", servers.mason, servers.others)) do
-			local command = config.command
-			config.command = nil
-			if skip_lsp(command) then
-				for cat, _ in pairs(servers) do
-					servers[cat][server] = nil
-				end
-			elseif not vim.tbl_isempty(config) then
-				vim.lsp.config(server, config)
-			end
-		end
 	end
 
 	if _G["userconfig"].extras.enable_godot then
