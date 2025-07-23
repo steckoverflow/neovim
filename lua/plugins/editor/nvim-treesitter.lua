@@ -21,6 +21,7 @@ return {
 			"sql",
 			"terraform",
 			"toml",
+			"svelte",
 			-- Copilot
 			"markdown",
 			"markdown_inline",
