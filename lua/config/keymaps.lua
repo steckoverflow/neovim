@@ -25,6 +25,7 @@ map("n", "<leader>w", function()
 	end
 end, { desc = "Save Buffer" })
 
+-- This is supposed to save and exit Neovim
 map("n", "<leader>x", function()
 	-- Close all terminal buffers first
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -34,8 +35,22 @@ map("n", "<leader>x", function()
 	end
 	vim.cmd("wqa")
 end, { desc = "Kill terminals and exit" })
+
+-- Close current buffer
+-- TODO: Make it work better together with bufferline.
 map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit Window" })
 
 -- Split window keymaps
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
 vim.keymap.set("n", "<leader>,", ":split<CR>", { desc = "Horizontal split" })
+
+--SQL
+vim.keymap.set("n", "<leader>Db", ":DBUI<CR>", { desc = "Open Database UI" })
+vim.keymap.set("n", "<leader>Dt", ":DBUIToggle<CR>", { desc = "Toggle Database UI" })
+vim.keymap.set("n", "<leader>Da", ":DBUIAddConnection<CR>", { desc = "Add Database Connection" })
+vim.keymap.set("n", "<leader>Df", ":DBUIFindBuffer<CR>", { desc = "Find Database Buffer" })
+
+--Csv
+vim.keymap.set("n", "<leader>cv", "<cmd>CsvViewEnable<cr>", { desc = "Enable CSV view" })
+vim.keymap.set("n", "<leader>cd", "<cmd>CsvViewDisable<cr>", { desc = "Disable CSV view" })
+vim.keymap.set("n", "<leader>ct", "<cmd>CsvViewToggle<cr>", { desc = "Toggle CSV view" })

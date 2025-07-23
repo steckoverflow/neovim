@@ -20,12 +20,12 @@ return {
 			formatters_by_ft.json = { "biome", "prettier" }
 		end
 		-- Add Golang formatters if Golang is enabled
-		if vim.tbl_contains(_G["userconfig"].languages, "Golang") then
+		if vim.tbl_contains(_G["userconfig"].languages, "golang") then
 			formatters_by_ft.go = { "goimports", lsp_format = "last" }
 		end
 
 		-- Add Python formatters if Python is enabled
-		if vim.tbl_contains(_G["userconfig"].languages, "Python") then
+		if vim.tbl_contains(_G["userconfig"].languages, "python") then
 			formatters_by_ft.python = { "ruff_organize_imports", "ruff_format" }
 		end
 

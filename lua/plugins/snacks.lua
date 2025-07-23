@@ -276,13 +276,13 @@ return {
 			end,
 			desc = "Buffer Lines",
 		},
-		{
-			"<leader>fgb",
-			function()
-				Snacks.picker.grep_buffers()
-			end,
-			desc = "Grep Open Buffers",
-		},
+		-- {
+		-- 	"<leader>fgb",
+		-- 	function()
+		-- 		Snacks.picker.grep_buffers()
+		-- 	end,
+		-- 	desc = "Grep Open Buffers",
+		-- },
 		{
 			"<leader>fg",
 			function()
@@ -589,13 +589,6 @@ return {
 				Snacks.bufdelete()
 			end,
 			desc = "Delete Buffer",
-		},
-		{
-			"<leader>cR",
-			function()
-				Snacks.rename.rename_file()
-			end,
-			desc = "Rename File",
 		},
 		{
 			"<leader>gB",
