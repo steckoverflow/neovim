@@ -70,6 +70,18 @@ M.config = function()
 					return vim.fn.exepath("python")
 				end,
 			},
+			{
+				type = "python",
+				request = "launch",
+				name = "Launch file with pytest",
+				module = "pytest",
+				args = { "${file}" },
+				justMyCode = false,
+				pythonPath = function()
+					-- You can customize this to point to your project's virtual environment
+					return vim.fn.exepath("python")
+				end,
+			},
 		}
 		local mason_packages = vim.fn.stdpath("data") .. "/mason/packages/"
 		require("dap-python").setup(mason_packages .. "debugpy/venv/bin/python")
