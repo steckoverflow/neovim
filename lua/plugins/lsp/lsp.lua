@@ -134,6 +134,7 @@ M.config = function()
 		servers.mason.tailwindcss = {}
 		servers.mason.cssls = {}
 		servers.mason.svelte = {}
+		servers.mason.biome = {}
 	end
 
 	if _G["userconfig"].extras.enable_godot then
