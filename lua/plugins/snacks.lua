@@ -584,13 +584,6 @@ return {
 			desc = "Notification History",
 		},
 		{
-			"<leader>bd",
-			function()
-				Snacks.bufdelete()
-			end,
-			desc = "Delete Buffer",
-		},
-		{
 			"<leader>gB",
 			function()
 				Snacks.gitbrowse()

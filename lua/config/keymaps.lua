@@ -38,7 +38,13 @@ end, { desc = "Kill terminals and exit" })
 
 -- Close current buffer
 -- TODO: Make it work better together with bufferline.
-map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit Window" })
+map("n", "<leader>Q", "<cmd>q<CR>", { desc = "Quit Window" })
+map("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Prev buffer" })
+map("n", "<leader>bb", "<cmd>b#<CR>", { desc = "Alternate buffer" })
+map("n", "<leader>q", function()
+	Snacks.bufdelete(0)
+end, { desc = "Close Buffer" })
 
 -- Split window keymaps
 vim.keymap.set("n", "<leader>|", ":vsplit<CR>", { desc = "Vertical split" })
