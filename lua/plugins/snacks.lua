@@ -612,7 +612,23 @@ return {
 			end,
 			desc = "Toggle Terminal",
 		},
-
+		{
+			"<leader>C",
+			function()
+				local copilot_exists = pcall(require, "copilot")
+				if copilot_exists then
+					local is_enabled = not require("copilot.client").is_disabled()
+					if is_enabled then
+						require("copilot.command").disable()
+						Snacks.notify.info("Copilot Disabled")
+					else
+						require("copilot.command").enable()
+						Snacks.notify.info("Copilot Enabled")
+					end
+				end
+			end,
+			desc = "Toggle Copilot",
+		},
 		-- Jump between word references created by Snacks.words
 		{
 			"]]",
