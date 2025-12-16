@@ -97,8 +97,11 @@ M.config = function()
 
 	-- Add Python-related servers if Python is enabled
 	if vim.tbl_contains(_G["userconfig"].languages, "python") then
-		servers.mason.ruff = {}
+		servers.mason.ruff = {
+			offset_encoding = "utf-8",
+		}
 		servers.mason.basedpyright = {
+			offset_encoding = "utf-8",
 			before_init = function(_, c)
 				if not c.settings then
 					c.settings = {}
