@@ -30,7 +30,7 @@ return {
 		end
 
 		--Godot
-		if _G["userconfig"].languages.godot then
+		if _G["userconfig"].extras.enable_godot then
 			formatters_by_ft.gdscript = { "gdformat" }
 		end
 
