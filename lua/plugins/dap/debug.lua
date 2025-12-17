@@ -185,8 +185,7 @@ M.config = function()
 end
 
 if _G["userconfig"].extras.debug then
-	print("\n\n\n Debug Config \n\n\n")
-	print(vim.inspect(M))
+	vim.notify("Debug Config:\n" .. vim.inspect(M), vim.log.levels.DEBUG)
 end
 
 return M

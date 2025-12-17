@@ -1,3 +1,7 @@
+if not vim.tbl_contains(_G["userconfig"].languages, "web") then
+	return {}
+end
+
 local function is_volta_installed()
 	return vim.fn.executable("volta") == 1
 end
@@ -18,7 +22,7 @@ if is_volta_installed() then
 		tsserver_path = vim.env.HOME .. "/.volta/tools/image/packages/typescript/bin/tsserver",
 	}
 else
-	print("Volta is not installed, using default tsserver path.")
+	vim.notify("Volta is not installed, using default tsserver path.", vim.log.levels.INFO)
 
 	opts.settings = {
 		tsserver_path = nil,
