@@ -99,12 +99,6 @@ M.config = function()
 	end
 	if vim.tbl_contains(_G["userconfig"].languages, "golang") then
 		require("dap-go").setup()
-		-- Godot Debugger Configuration
-		dap.adapters.godot = {
-			type = "server",
-			host = "127.0.0.1",
-			port = 6006,
-		}
 	end
 
 	if vim.tbl_contains(_G["userconfig"].languages, "web") then
@@ -159,6 +153,11 @@ M.config = function()
 	end
 
 	if _G["userconfig"].extras.enable_godot then
+		dap.adapters.godot = {
+			type = "server",
+			host = "127.0.0.1",
+			port = 6006,
+		}
 		dap.configurations.gdscript = {
 			{
 				type = "godot",
