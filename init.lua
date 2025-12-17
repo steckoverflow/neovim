@@ -1,4 +1,4 @@
----@type UserConfig
+---@type userconfig
 _G.userconfig = require("config.userconfig").config
 
 vim.g.mapleader = " "

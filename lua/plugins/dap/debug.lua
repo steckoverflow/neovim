@@ -73,6 +73,17 @@ M.config = function()
 			{
 				type = "python",
 				request = "launch",
+				name = "Launch file (w external code)",
+				program = "${file}", -- This will use the current file
+				pythonPath = function()
+					-- You can customize this to point to your project's virtual environment
+					return vim.fn.exepath("python")
+				end,
+				justMyCode = false,
+			},
+			{
+				type = "python",
+				request = "launch",
 				name = "Launch file with pytest",
 				module = "pytest",
 				args = { "${file}" },

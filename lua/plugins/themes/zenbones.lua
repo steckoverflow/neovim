@@ -9,5 +9,6 @@ return {
 	-- you can set set configuration options here
 	config = function()
 		vim.g.duckbones_transparent_background = true
+		vim.g.zenburned_transparent_background = true
 	end,
 }
