@@ -57,7 +57,8 @@ M.config = function()
 	end
 
 	if vim.tbl_contains(_G["userconfig"].languages, "python") then
-		require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+		local mason_packages = vim.fn.stdpath("data") .. "/mason/packages/"
+		require("dap-python").setup(mason_packages .. "debugpy/venv/bin/python")
 		-- Python Debugger Configuration
 		dap.configurations.python = {
 			{
@@ -94,8 +95,6 @@ M.config = function()
 				end,
 			},
 		}
-		local mason_packages = vim.fn.stdpath("data") .. "/mason/packages/"
-		require("dap-python").setup(mason_packages .. "debugpy/venv/bin/python")
 	end
 	if vim.tbl_contains(_G["userconfig"].languages, "golang") then
 		require("dap-go").setup()

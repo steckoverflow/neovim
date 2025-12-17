@@ -22,7 +22,6 @@ if _G.userconfig.extras.enable_godot then
 end
 
 --Colorscheme
-
 if _G.userconfig.colorscheme then
 	vim.cmd("colorscheme " .. _G.userconfig.colorscheme)
 else
